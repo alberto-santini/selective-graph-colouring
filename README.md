@@ -24,7 +24,7 @@ The various solution algorithms are:
 ### Folder `instances`
 
 This folder contains test instances from the literature.
-There are three test sets: `random`, `nsfnet`, and `ring`.
+There are four test sets: `random`, `big-random`, `nsfnet`, and `ring`.
 The instance format is the following:
 
 * The first line only has one number `n`, which is the number of vertices in the graph (numbered from `0` to `n-1`)

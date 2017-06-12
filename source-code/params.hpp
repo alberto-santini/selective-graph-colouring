@@ -32,6 +32,9 @@ namespace sgcp {
         uint32_t tabu_iterations;
         uint32_t tabu_tenure;
         bool tabu_instance_scaled_iters;
+        bool tabu_randomised_tenure;
+        uint32_t tabu_min_rnd_tenure;
+        uint32_t tabu_max_rnd_tenure;
         std::string tabu_score;
 
         uint32_t alns_iterations;

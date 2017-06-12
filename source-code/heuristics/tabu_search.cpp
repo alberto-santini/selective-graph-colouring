@@ -146,7 +146,7 @@ namespace sgcp {
         return partitions_colour_status.uncoloured.empty();
     }
     
-    void TabuSearchSolver::insert(const TabuSearchSolver::InsertionResult& r) {
+    void TabuSearchSolver::insert(const TabuSearchSolver::InsertionResult& r, uint32_t tenure) {
         for(auto v : r.removed_vertices) {
             colouring_stable_sets[r.colour].remove_vertex(v);
             uncoloured_set.insert(v);
@@ -163,7 +163,7 @@ namespace sgcp {
         partitions_colour_status.uncoloured.erase(r.coloured_partition);
         partitions_colour_status.coloured.insert(r.coloured_partition);
         
-        tabu_list.insert(std::make_pair(TabuElement{r.colour, r.inserted_vertex}, iteration_n + g.params.tabu_tenure));
+        tabu_list.insert(std::make_pair(TabuElement{r.colour, r.inserted_vertex}, iteration_n + tenure));
         
         if(all_partitions_coloured()) { solutions.push_back(colouring_stable_sets); }
     }
@@ -204,6 +204,8 @@ namespace sgcp {
         std::seed_seq seeds(std::begin(random_data), std::end(random_data));
         std::mt19937 mt(seeds);
 
+        std::uniform_int_distribution<uint32_t> tenure_dist(g.params.tabu_min_rnd_tenure, g.params.tabu_max_rnd_tenure);
+
         uint32_t max_iterations = g.params.tabu_iterations;
 
         if(g.params.tabu_instance_scaled_iters) {
@@ -240,8 +242,13 @@ namespace sgcp {
                     return col_ins_1.second.score < col_ins_2.second.score;
                 }
             );
+
+            uint32_t tenure = g.params.tabu_tenure;
+            if(g.params.tabu_randomised_tenure) {
+                tenure = tenure_dist(mt);
+            }
             
-            insert(best_insertion_it->second);
+            insert(best_insertion_it->second, tenure);
             
             if(all_partitions_coloured()) { return solutions; }
             else { update_tabu_list(); }

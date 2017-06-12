@@ -27,8 +27,11 @@ namespace sgcp {
         mwss_multiplier = tree.get<uint32_t>("mwss_multiplier");
 
         tabu_iterations = tree.get<uint32_t>("tabu.iterations");
-        tabu_instance_scaled_iters = tree.get<bool>("tabu.instance_scaled_iters");
         tabu_tenure = tree.get<uint32_t>("tabu.tenure");
+        tabu_instance_scaled_iters = tree.get<bool>("tabu.instance_scaled_iters");
+        tabu_randomised_tenure = tree.get<bool>("tabu.randomised_tenure");
+        tabu_min_rnd_tenure = tree.get<uint32_t>("tabu.min_randomised_tenure");
+        tabu_max_rnd_tenure = tree.get<uint32_t>("tabu.max_randomised_tenure");
         std::string tabu_score = tree.get<std::string>("tabu.score");
 
         alns_iterations = tree.get<uint32_t>("alns.iterations");

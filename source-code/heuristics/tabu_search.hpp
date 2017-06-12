@@ -85,7 +85,9 @@ namespace sgcp {
         InsertionResult simulate_insertion(uint32_t vertex, uint32_t partition, uint32_t colour) const;
     
         // Actually perform the insertion.
-        void insert(const InsertionResult& r);
+        // It also puts the corresponding move in the rabu list, for
+        // the number of iterations specified in ``tenure''.
+        void insert(const InsertionResult& r, uint32_t tenure);
     
         // Tells wether all partitions have been coloured.
         bool all_partitions_coloured() const;

@@ -13,12 +13,13 @@
 #include <chrono>
 #include <utils/cache.hpp>
 
-std::array<std::string, 9> solvers = {
+std::array<std::string, 10> solvers = {
     "bp", // Branch-and-price
     "campelo", // Campelo's representatives model
     "compact", // Compact formulation without representatives
     "greedy", // Greedy initial heuristics
     "alns", // ALNS heuristic
+    "alns-stats", // ALNS heuristic with stats
     "tabu", // TABU Search heuristic
     "grasp", // GRASP heuristic
     "decomposition", // Benders-like decomposition solver
@@ -72,17 +73,22 @@ void solve_greedy(std::shared_ptr<sgcp::Graph> g) {
     std::cout << g->data_filename << "," << sol.size() << std::endl;
 }
 
-void solve_alns(std::shared_ptr<sgcp::Graph> g) {
+void solve_alns(std::shared_ptr<sgcp::Graph> g, bool print_stats) {
     sgcp::ALNSSolver solver{*g};
+    sgcp::ALNSStats stats;
     float elapsed_time = 0;
-    auto sol = solver.solve(boost::none, &elapsed_time);
+    auto sol = solver.solve(boost::none, &elapsed_time, print_stats ? &stats : nullptr);
 
-    std::cout << g->data_filename << ","
-              << g->params.alns_acceptance << ","
-              << g->params.tabu_tenure << ","
-              << g->params.alns_wa_initial_probability << ","
-              << elapsed_time << ","
-              << sol.n_colours << std::endl;
+    if(print_stats) {
+        stats.print_stats();
+    } else {
+        std::cout << g->data_filename << ","
+                  << g->params.alns_acceptance << ","
+                  << g->params.tabu_tenure << ","
+                  << g->params.alns_wa_initial_probability << ","
+                  << elapsed_time << ","
+                  << sol.n_colours << std::endl;
+    }
 
     sgcp::cache::bks_update_cache(sol.to_column_pool(), *g);
 }
@@ -119,7 +125,7 @@ void solve_decomposition(std::shared_ptr<sgcp::Graph> g) {
     c.solve();
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc [[maybe_unused]], char* argv[]) {
     using namespace sgcp;
 
     std::string params_file = argv[1];
@@ -152,7 +158,9 @@ int main(int argc, char* argv[]) {
     } else if(solver == "greedy") {
         solve_greedy(g);
     } else if(solver == "alns") {
-        solve_alns(g);
+        solve_alns(g, false);
+    } else if(solver == "alns-stats") {
+        solve_alns(g, true);
     } else if(solver == "tabu") {
         solve_tabu(g);
     } else if(solver == "grasp") {

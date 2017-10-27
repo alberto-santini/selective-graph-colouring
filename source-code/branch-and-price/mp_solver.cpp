@@ -66,7 +66,7 @@ namespace sgcp {
 
         for(auto cid = 0u; cid < c.size(); cid++) {
             auto val = cplex.getValue(x[cid]);
-            if(val > eps) { columns[c.at(cid)] = val; }
+            if(val > static_cast<double>(eps)) { columns[c.at(cid)] = val; }
         }
 
         if(lp) { for(auto k = 0u; k < g.n_partitions; k++) { duals[k] = cplex.getDual(colour[k]); } }

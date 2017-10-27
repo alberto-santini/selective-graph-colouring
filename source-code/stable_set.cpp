@@ -73,6 +73,7 @@ namespace sgcp {
             }
         );
 
+        assert(it != s.end());
         return *it;
     }
 

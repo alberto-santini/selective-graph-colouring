@@ -147,7 +147,7 @@ namespace sgcp {
 
         for(const auto& cidval : sol.lp_solution_columns) {
             const StableSet& s = column_pool.at(cidval.first);
-            float fractionality = std::abs(cidval.second - 0.5);
+            float fractionality = std::abs(cidval.second - 0.5f);
             
             if(s.dummy) {
                 throw std::runtime_error("vertex_in_most_fractional_column_that_covers_partition: Base solution contains dummy column!");

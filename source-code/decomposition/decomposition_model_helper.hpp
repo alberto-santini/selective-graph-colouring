@@ -30,7 +30,7 @@ namespace sgcp {
         std::vector<IloRange> generate_constraint_for(IloArray<IloNumVarArray>& x, const PartitionsIdVec& p) const;
         void add_all_3incompatible_cuts(IloArray<IloNumVarArray>& x);
         void add_best_3incompatible_cuts(IloArray<IloNumVarArray>& x);
-        void set_initial_solution(const MpSolution& init, IloCplex& cplex, IloRangeArray& link, IloRangeArray& col, IloRangeArray& clique, IloArray<IloNumVarArray>& x, IloNumVarArray& z) const;
+        void set_initial_solution(const MpSolution& init, IloCplex& cplex, IloArray<IloNumVarArray>& x, IloNumVarArray& z) const;
         void try_initial_solution_from_file(std::string filename, IloCplex& cplex, IloRangeArray& link, IloRangeArray& col, IloRangeArray& clique, IloArray<IloNumVarArray>& x, IloNumVarArray& z) const;
         
         DecompositionModelHelper(const Graph& g, IloEnv& env, IloModel& model, const DecompositionGraphHelper& gh, uint32_t ub) : g{g}, env{env}, model{model}, gh{gh}, ub{ub} {}

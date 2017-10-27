@@ -77,14 +77,14 @@ namespace sgcp {
 
         // DEBUG_ONLY(std::cout << "Sewell MWSS Solution: " << static_cast<float>(m_data.best_z) / static_cast<float>(multiplier) << std::endl;)
 
-        s = make_stable_set(m_graph, m_data);
+        s = make_stable_set(m_data);
 
         CLEANUP: free_max_wstable(&m_graph, &m_data, &m_info);
 
         return s;
     }
 
-    StableSet SewellMwssSolver::make_stable_set(const MWSSgraph& m_graph, const MWSSdata& m_data) const {
+    StableSet SewellMwssSolver::make_stable_set(const MWSSdata& m_data) const {
         VertexIdSet s;
 
         for(auto i = 1; i <= m_data.n_best; i++) {

@@ -208,7 +208,7 @@ namespace sgcp {
                 std::all_of(
                 mip_cols.begin(),
                 mip_cols.end(),
-                [this] (const auto& id_coeff) { return (id_coeff.second < 0.5 || !c.get().at(id_coeff.first).dummy); }
+                [this] (const auto& id_coeff) { return (id_coeff.second < 0.5f || !c.get().at(id_coeff.first).dummy); }
             );
 
             if(mip_sol_feasible) {
@@ -216,7 +216,7 @@ namespace sgcp {
                 integer_solution_columns = mip_cols;
 
                 if( g->params.mip_heur_alns &&
-                    ub - std::ceil(lb) > .5 // Otherwise we just found the optimal solution with MIP, no need for ALNS
+                    ub - std::ceil(lb) > 0.5f // Otherwise we just found the optimal solution with MIP, no need for ALNS
                 ) {
                     // Try to improve on the MIP solution with ALNS
                     ColumnPool initial_solution;

@@ -27,7 +27,7 @@ namespace sgcp {
         static constexpr float eps = 1e-6;
 
         void calculate_int_weights(const WeightMap& w);
-        StableSet make_stable_set(const MWSSgraph& m_graph, const MWSSdata& m_data) const;
+        StableSet make_stable_set(const MWSSdata& m_data) const;
 
     public:
         SewellMwssSolver(const Graph& o, const Graph& g, WeightMap w);

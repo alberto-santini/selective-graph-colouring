@@ -67,18 +67,18 @@ namespace sgcp {
             acceptance = nullptr;
         }
 
-        if(g.params.alns_acceptance == "accept_everything") {
+        if(ac_description == "accept_everything") {
             acceptance = new AcceptEverything{};
-        } else if(g.params.alns_acceptance == "accept_non_deteriorating") {
+        } else if(ac_description == "accept_non_deteriorating") {
             acceptance = new AcceptNonDeteriorating{};
-        } else if(g.params.alns_acceptance == "worse_accept") {
+        } else if(ac_description == "worse_accept") {
             acceptance = new WorseAccept{g.params.alns_wa_initial_probability, max_iterations};
         } else {
             throw "Acceptance criterion not recognised!";
         }
     }
 
-    ALNSColouring ALNSSolver::solve(boost::optional<StableSetCollection> initial, float* elapsed_time) {
+    ALNSColouring ALNSSolver::solve(boost::optional<StableSetCollection> initial, float* elapsed_time, ALNSStats* stats) {
         // Iteration counter.
         uint32_t current_iteration = 0;
 
@@ -105,6 +105,12 @@ namespace sgcp {
             auto destroy_id = roulette_wheel(destroy_score);
             auto repair_id = roulette_wheel(repair_score);
 
+            // Record statistics on the chosen methods.
+            if(stats) {
+                stats->add_destroy(destroy_id);
+                stats->add_repair(repair_id);
+            }
+
             // Apply the destroy and repair methods, to obtain a new
             // solution.
             (*destroy[destroy_id])(incumbent);
@@ -115,6 +121,11 @@ namespace sgcp {
 
             // If the new solution is accepted:
             if((*acceptance)(current, incumbent, current_iteration)) {
+                // Record statistics on acceptance
+                if(stats) {
+                    stats->add_accepted();
+                }
+
                 // If the new solution improves on the best currently known:
                 if(incumbent.score() < best.score()) {
                     // Update best and scores accordingly.
@@ -131,12 +142,19 @@ namespace sgcp {
                 // In any case, since the new move was accepted, it will
                 // replace the current.
                 current = incumbent;
-            } else if(incumbent.score() > current.score()) {
-                // If the new move was not accepted and it actually has
-                // a worse score than the current:
-                // Update the scores accordingly.
-                update_score_found_worse(destroy_id, destroy_score);
-                update_score_found_worse(repair_id, repair_score);
+            } else {
+                // Record statistics on acceptance
+                if(stats) {
+                    stats->add_rejected();
+                }
+
+                if(incumbent.score() > current.score()) {
+                    // If the new move was not accepted and it actually has
+                    // a worse score than the current:
+                    // Update the scores accordingly.
+                    update_score_found_worse(destroy_id, destroy_score);
+                    update_score_found_worse(repair_id, repair_score);
+                }
             }
 
             // Check if there is any move that should get out of the tabu list.

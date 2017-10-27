@@ -160,7 +160,7 @@ namespace sgcp {
         cplex.setWarning(env.getNullStream());
         
         if(initial_solution) {
-            mh.set_initial_solution(*initial_solution, cplex, link, col, clique, x, z);
+            mh.set_initial_solution(*initial_solution, cplex, x, z);
         }
 
         while(true) {

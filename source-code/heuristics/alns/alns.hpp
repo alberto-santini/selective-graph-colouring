@@ -9,6 +9,7 @@
 #include "repair.hpp"
 #include "acceptance.hpp"
 #include "local_search.hpp"
+#include "alns_stats.h"
 
 #include <vector>
 #include <random>
@@ -68,12 +69,14 @@ namespace sgcp {
         // Creates an initial solution, by first calling the constructive heuristics.
         ALNSColouring initial_solution() const;
 
-        // Runs the ALNS for ``max_iterations'' iterations and returns the best colouring.
-        // You can optionally pass an initial solution. If you don't (i.e. pass nullptr
-        // as the second argument), the constructive heuristics are called to generate
-        // the initial solution. You can also pass a pointer to a float where we will store
+        // Runs ALNS and returns the best colouring.
+        // You can optionally pass an initial solution. If you don't, the constructive
+        // heuristics are called to generate the initial solution.
+        // You can also pass a pointer to a float where we will store
         // the elapsed time in seconds (this is optional).
-        ALNSColouring solve(boost::optional<StableSetCollection> initial = boost::none, float* elapsed_time = nullptr);
+        // You can also pass a pointer to an ALNSStats object to record
+        // statistics about the solution process (this is optional).
+        ALNSColouring solve(boost::optional<StableSetCollection> initial = boost::none, float* elapsed_time = nullptr, ALNSStats* stats = nullptr);
 
         // Gives the index of an element of vec, selected according to roulette
         // wheel selection, where the probabilities are proportional to the values

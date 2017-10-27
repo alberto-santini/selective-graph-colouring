@@ -33,7 +33,7 @@ namespace sgcp {
     public:
         EmptyRule(std::shared_ptr<const Graph> g) : BranchingRule{g} {}
         std::shared_ptr<const Graph> apply() const { return g; }
-        bool is_compatible(const StableSet& s) const { return true; }
+        bool is_compatible(const StableSet& s [[maybe_unused]]) const { return true; }
     };
 
     // Removes certain vertices from the graph

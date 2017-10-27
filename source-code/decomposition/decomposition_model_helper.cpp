@@ -134,7 +134,7 @@ namespace sgcp {
 
         for(auto k = 0u; k < g.n_partitions; k++) {
             for(auto c = 0u; c < std::min(k+1, ub); c++) {
-                if(cplex.getValue(x[k][c]) > eps) {
+                if(cplex.getValue(x[k][c]) > static_cast<IloNum>(eps)) {
                     cp[c].push_back(k);
                 }
             }
@@ -267,7 +267,7 @@ namespace sgcp {
         initial_vals.end();
     }
     
-    void DecompositionModelHelper::set_initial_solution(const MpSolution& init, IloCplex& cplex, IloRangeArray& link, IloRangeArray& col, IloRangeArray& clique, IloArray<IloNumVarArray>& x, IloNumVarArray& z) const {
+    void DecompositionModelHelper::set_initial_solution(const MpSolution& init, IloCplex& cplex, IloArray<IloNumVarArray>& x, IloNumVarArray& z) const {
         IloNumVarArray initial_vars(env);
         IloNumArray initial_vals(env);
         

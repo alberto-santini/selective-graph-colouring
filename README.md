@@ -3,7 +3,7 @@
 This repository contains the source code for heuristic and exact methods to solve the Selective Graph Colouring Problem.
 The reference paper for these algorithms is:
 
-    Fabio Furini, Enrico Malaguti, and Alberto Santini. An exact algorithm for the Partition Colouring Problem. Computers & Operations Resarch (under revision), 2017
+    Fabio Furini, Enrico Malaguti, and Alberto Santini. An exact algorithm for the Partition Colouring Problem. Computers & Operations Resarch, 92:170-181, 2018. 
 
 
 ### Folder `source-code`

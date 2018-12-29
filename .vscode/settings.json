@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.cls": "latex",
+        "chrono": "cpp"
+    }
+}

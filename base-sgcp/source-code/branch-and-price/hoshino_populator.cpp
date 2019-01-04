@@ -2,7 +2,7 @@
 // Created by alberto on 23/04/17.
 //
 
-#include <utils/console_colour.hpp>
+#include "../utils/console_colour.hpp"
 #include "hoshino_populator.hpp"
 
 namespace sgcp {

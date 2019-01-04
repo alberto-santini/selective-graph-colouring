@@ -2,9 +2,9 @@
 #define _ALNS_COLOURING_HPP
 
 #include "../../graph.hpp"
+#include "../../branch-and-price/column_pool.hpp"
 #include <vector>
 #include <random>
-#include <branch-and-price/column_pool.hpp>
 
 namespace sgcp {
 

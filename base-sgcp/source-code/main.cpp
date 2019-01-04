@@ -9,9 +9,9 @@
 #include "heuristics/tabu_search.hpp"
 #include "heuristics/greedy_heuristic.hpp"
 #include "heuristics/grasp.hpp"
+#include "utils/cache.hpp"
 
 #include <chrono>
-#include <utils/cache.hpp>
 
 std::array<std::string, 10> solvers = {
     "bp", // Branch-and-price

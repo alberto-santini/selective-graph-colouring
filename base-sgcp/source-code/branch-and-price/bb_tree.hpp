@@ -15,7 +15,7 @@
 
 namespace sgcp {
     struct BestFirstOrder {
-        bool operator()(const BBNode& lhs, const BBNode& rhs) {
+        bool operator()(const BBNode& lhs, const BBNode& rhs) const {
             if(!lhs.bound_from_father) { return true; }
             if(!rhs.bound_from_father) { return false; }
             return std::tie(*lhs.bound_from_father, lhs.node_id) < std::tie(*rhs.bound_from_father, rhs.node_id);
@@ -23,7 +23,7 @@ namespace sgcp {
     };
 
     struct DepthFirstOrder {
-        bool operator()(const BBNode& lhs, const BBNode& rhs) {
+        bool operator()(const BBNode& lhs, const BBNode& rhs) const {
             if(lhs.depth != rhs.depth) {
                 return lhs.depth > rhs.depth;
             }
@@ -39,7 +39,7 @@ namespace sgcp {
 
         BBOrder(const Params& p) : p{p} {}
 
-        bool operator()(const BBNode& lhs, const BBNode& rhs) {
+        bool operator()(const BBNode& lhs, const BBNode& rhs) const {
             if(p.bb_exploration_strategy == BBExplorationStrategy::DepthFirst) { return df(lhs, rhs); }
             return bf(lhs,rhs);
         }

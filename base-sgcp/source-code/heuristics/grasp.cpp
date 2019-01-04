@@ -2,11 +2,12 @@
 // Created by alberto on 11/03/17.
 //
 
-#include <mwss/sewell_mwss_solver.hpp>
+#include "../mwss/sewell_mwss_solver.hpp"
+#include "alns/local_search.hpp"
+#include "grasp.hpp"
+
 #include <mutex>
 #include <thread>
-#include <heuristics/alns/local_search.hpp>
-#include "grasp.hpp"
 
 namespace sgcp {
     std::pair<Graph, WeightMap> GRASPSolver::reduce(const Graph& g, const WeightMap& wm, const std::set<uint32_t>& coloured_v) const {

@@ -1,9 +1,9 @@
 #include "greedy_heuristic.hpp"
+#include "../utils/cache.hpp"
 
 #include <boost/optional.hpp>
 #include <vector>
 #include <numeric>
-#include <utils/cache.hpp>
 
 namespace sgcp {
     StableSetCollection GreedyHeuristicSolver::solve() const {

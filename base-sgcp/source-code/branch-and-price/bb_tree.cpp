@@ -5,6 +5,7 @@
 #include "hoshino_populator.hpp"
 #include "../utils/console_colour.hpp"
 #include "../utils/dbg_output.hpp"
+#include "../utils/cache.hpp"
 
 #include <algorithm>
 #include <iostream>
@@ -12,7 +13,6 @@
 #include <memory>
 #include <chrono>
 #include <cmath>
-#include <utils/cache.hpp>
 
 namespace sgcp {
     BBTree::BBTree(std::shared_ptr<const Graph> original_g) :

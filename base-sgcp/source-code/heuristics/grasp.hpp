@@ -5,7 +5,7 @@
 #ifndef SGCP_GRASP_HPP
 #define SGCP_GRASP_HPP
 
-#include <branch-and-price/column_pool.hpp>
+#include "../branch-and-price/column_pool.hpp"
 #include "../graph.hpp"
 
 namespace sgcp {

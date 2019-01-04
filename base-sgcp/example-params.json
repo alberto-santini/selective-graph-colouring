@@ -1,0 +1,66 @@
+{
+  "branch_and_price": {
+    "time_limit": 3600,
+    "cplex_threads": 1,
+    "mp_time_limit": 60,
+    "bb_exploration_strategy": "depth-first",
+    "use_initial_solution": true,
+    "use_populate": true,
+
+    "mip_heuristic": {
+      "active": true,
+      "time_limit": 30,
+      "time_limit_first": 60,
+      "max_cols": 500,
+      "frequency": 500,
+      "alns": true
+    }
+  },
+
+  "mwss_multiplier": 10000,
+
+  "tabu": {
+    "iterations": 20000,
+    "tenure": 150,
+    "instance_scaled_iters": true,
+    "randomised_tenure": false,
+    "min_randomised_tenure": 100,
+    "max_randomised_tenure": 200,
+    "score": "sum"
+  },
+
+  "alns": {
+    "iterations": 50000,
+    "instance_scaled_iters": true,
+    "new_best_mult": 1.2,
+    "new_improving_mult": 1.1,
+    "worsening_mult": 0.99,
+    "wa_initial_probability": 0.1,
+    "acceptance": "worse_accept",
+    "local_search": "decrease_by_one",
+    "dmoves": [
+      1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1
+    ],
+    "rmoves": [
+      1, 1, 1, 1, 1, 1, 1, 1, 0
+    ]
+  },
+
+  "grasp": {
+    "iterations": 10,
+    "threads": 1
+  },
+
+  "results": {
+    "print_bb_stats_every_n_nodes": 100,
+    "results_dir": "../results",
+    "results_file": "results.txt"
+  },
+
+  "decomposition": {
+    "first_stage_time_limit": 3600,
+    "lifting_coeff": 5,
+    "max_added_cuts_when_caching": 1000,
+    "3cuts_strategy": "cache"
+  }
+}

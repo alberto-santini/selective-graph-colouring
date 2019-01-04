@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
 
     parser["problem-type"]
         .abbreviation('y')
-        .description("Type of problem to solve. It can be either weighted-clique, weighted-mip, or unweighted (default).")
+        .description("Type of problem to solve. It can be either weighted-clique, weighted-mip, weighted-stable-set, or unweighted (default).")
         .type(po::string)
         .fallback("unweighted");
 

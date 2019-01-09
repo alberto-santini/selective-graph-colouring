@@ -202,7 +202,7 @@ namespace sgcp {
         if(!part_and_vertex) { return false; }
 
         DEBUG_ONLY(std::cout << Colour::Yellow << "Branching on which vertex to colour in partition " << part_and_vertex->first << std::endl;)
-        auto chosen_v = g->vertex_by_id(part_and_vertex->second);
+        [[maybe_unused]] auto chosen_v = g->vertex_by_id(part_and_vertex->second);
         assert(chosen_v);
         DEBUG_ONLY(std::cout << "Vertex: " << g->g[*chosen_v] << std::endl;)
         DEBUG_ONLY(std::cout << yellow_separator() << Colour::Default << std::endl << std::endl;)
@@ -251,9 +251,9 @@ namespace sgcp {
         assert(*id_j != *id_i);
         assert(!g->connected(*id_i, *id_j));
 
-        auto v_i = g->vertex_by_id(*id_i);
+        [[maybe_unused]] auto v_i = g->vertex_by_id(*id_i);
         assert(v_i);
-        auto v_j = g->vertex_by_id(*id_j);
+        [[maybe_unused]] auto v_j = g->vertex_by_id(*id_j);
         assert(v_j);
 
         DEBUG_ONLY(std::cout << Colour::Yellow << "Branching on vertices covered by two columns" << std::endl;)

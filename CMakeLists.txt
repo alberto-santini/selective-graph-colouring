@@ -41,10 +41,10 @@ target_link_libraries(      sgcp PRIVATE ${EXACTCOLORS_LIBRARIES})
 target_link_libraries(      sgcp PRIVATE Boost::filesystem)
 target_link_libraries(      sgcp PRIVATE dl)
 
-# Target 2: Solver min-weight-sgcp
+# Target 2: Solver max-weight-sgcp
 
-file(GLOB MW_HEADERS min-weight-sgcp/source-code/*.h)
-file(GLOB MW_TUS min-weight-sgcp/source-code/*.cpp)
+file(GLOB MW_HEADERS max-weight-sgcp/source-code/*.h)
+file(GLOB MW_TUS max-weight-sgcp/source-code/*.cpp)
 set(MW_SOURCES ${MW_HEADERS} ${MW_TUS})
 add_executable(mwsgcp ${MW_SOURCES})
 

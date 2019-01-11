@@ -2,16 +2,16 @@
 
 This repository contains the source code for:
 
-1.  Heuristic and exact methods to solve the Selective Graph Colouring Problem (SGCP).
+1.  Heuristic and exact methods to solve the **Selective Graph Colouring Problem** (SGCP).
 This is an extension of the classical Graph Colouring Problem, when the vertex set is partitioned in clusters, and we only need to colour one vertex for each cluster.
-2.  Exact methods to solve the Max-Weight Selective Graph Colouring Problem (MWSGCP).
+2.  Exact methods to solve the **Max-Weight Selective Graph Colouring Problem** (MWSGCP).
 This is an extension of the SGCP, when each cluster is associated with a weight; each colour gets the weight of the heaviest cluster it covers (hence the name *max*-weight) and the objective is to minimise the sum of the weights of the colours.
 
 # Building the solvers
 
 The easiest way to build is probably using cmake.
 Prerequisites are [Boost](https://www.boost.org/) (for `base-sgcp`), [exactcolors](https://github.com/heldstephan/exactcolors) and IBM's cplex (for both `base-sgcp` and `max-weight-sgcp`), [ProgramOptions.hxx](https://github.com/Fytch/ProgramOptions.hxx) (for `max-weight-sgcp`).
-Cmake config files are provided for exactcolors and cplex in folder `cmake` (boost is supported in cmake natively, so no additional config file is needed).
+Cmake config files are provided for exactcolors and cplex in folder `cmake` (boost is supported in cmake natively, so no additional config file is needed; ProgramOptions is header-only).
 The main cmake configuration file is `CMakeLists.txt`.
 
 For example, you can build both solvers with:
@@ -21,7 +21,7 @@ For example, you can build both solvers with:
 3.  Run make, e.g.: `make -j4`.
 
 Once make is done, you will have two executables: `sgcp` for the SGCP, and `mwsgcp` for the MWSGCP.
-Above, some example on how to run them.
+Below are some examples on how to run them.
 
 ## Running `sgcp`
 
@@ -65,6 +65,8 @@ Above, some example on how to run them.
     1: { 17 7 19 14 } (valid? true)
     2: { 4 0 15 } (valid? true)
 
+You file detailed results in CSV format at the path you specified in the parameter file.
+
 ## Running `mwsgcp`
 
     ./mwsgcp --help
@@ -88,6 +90,8 @@ Above, some example on how to run them.
     Greedy algorithm found  best_z 213.
     Sewell Stable Set solver finished (0.000491621 s)
     Stable Set solver result: 230 (465 - 235)
+
+You will find detailed results in CSV format in the file specified with the `-o` switch.
 
 # Selective Graph Colouring Problem
 

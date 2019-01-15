@@ -52,7 +52,10 @@ void solve_bp(std::shared_ptr<sgcp::Graph> g) {
     bb_tree.write_results();
 
     print_solution(sol);
-    sgcp::cache::bks_update_cache(*sol, *g);
+
+    if(sol) {
+        sgcp::cache::bks_update_cache(*sol, *g);
+    }
 }
 
 void solve_campelo(std::shared_ptr<sgcp::Graph> g) {

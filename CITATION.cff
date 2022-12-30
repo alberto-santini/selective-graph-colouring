@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Santini"
+  given-names: "Alberto"
+  orcid: "https://orcid.org/0000-0002-0440-0357"
+title: " Solvers for the Selective Graph Colouring Problem and generalisations"
+version: 1.2
+doi: 10.5281/zenodo.1038270 
+date-released: 2017-10-27
+url: https://github.com/alberto-santini/selective-graph-colouring
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Furini"
+    given-names: "Fabio"
+  - family-names: "Malaguti"
+    given-names: "Enrico"
+  - family-names: "Santini"
+    given-names: "Alberto"
+    orcid: "https://orcid.org/0000-0002-0440-0357"
+  doi: 10.1016/j.cor.2017.12.019
+  journal: "Computers & Operations Research"
+  title: "An Exact Algorithm for the Partition Coloring Problem"
+  year: 2018
+  volume: 92
+  start: 170
+  end: 181

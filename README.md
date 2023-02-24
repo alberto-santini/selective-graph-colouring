@@ -1,13 +1,60 @@
-# Problems Considered
+![Children colouring](colouring.jpg)
+<sub><sub>Human solvers for another type of colouring problem... Picture by San Mateo County Libraries distributed under License Attribution-NonCommercial-ShareAlike 2.0 Generic (CC BY-NC-SA 2.0)</sub></sub>
+
+# Selective Graph Colouring and Max-Weight Selective Graph Colouring
 
 This repository contains the source code for:
 
-1.  Heuristic and exact methods to solve the **Selective Graph Colouring Problem** (SGCP).
-This is an extension of the classical Graph Colouring Problem, when the vertex set is partitioned in clusters, and we only need to colour one vertex for each cluster.
-2.  Exact methods to solve the **Max-Weight Selective Graph Colouring Problem** (MWSGCP).
-This is an extension of the SGCP, when each cluster is associated with a weight; each colour gets the weight of the heaviest cluster it covers (hence the name *max*-weight) and the objective is to minimise the sum of the weights of the colours.
+1. Heuristic and exact methods to solve the **Selective Graph Colouring Problem** (SGCP). This is an extension of the classical Graph Colouring Problem, when the vertex set is partitioned in clusters, and we only need to colour one vertex for each cluster. This problem is also known as the Partition Colouring Problem.
+2. Exact methods to solve the **Max-Weight Selective Graph Colouring Problem** (MWSGCP). This is an extension of the SGCP, when each cluster is associated with a weight; each colour gets the weight of the heaviest cluster it covers (hence the name *max*-weight) and the objective is to minimise the sum of the weights of the colours. This problem is also known as the Maximum Weight Partition Colouring Problem.
 
-# Building the solvers
+## Citation
+
+The reference paper for the **Selective Graph Colouring Problem** is the following:
+
+```bib
+@article{furini2018branch,
+  title={An Exact Algorithm for the {Partition Coloring Problem}},
+  author={Furini, Fabio and Malaguti, Enrico and Santini, Alberto},
+  journal={{Computers \& Operations Research}},
+  pages={170--181},
+  volume=92,
+  year=2018,
+  doi={10.1016/j.cor.2017.12.019}
+}
+```
+
+The reference paper for the **Maximum-Weight Selective Colouring Problem** is the following:
+
+```bib
+@article{cornaz2019selective,
+  title={A note on selective line-graphs and partition colorings},
+  author={Cornaz, Denis and Furini, Fabio and Malaguti, Enrico and Santini, Alberto},
+  journal={{Operations Research Letters}},
+  year=2019,
+  volume=47,
+  issue=6,
+  pages={565--568},
+  doi={10.1016/j.orl.2019.08.005}
+}
+```
+
+You can also cite this repository through Zenodo.
+
+[![DOI](https://zenodo.org/badge/91941968.svg)](https://zenodo.org/badge/latestdoi/91941968)
+
+```bib
+@misc{selective_colouring_github,
+    title={Solvers for the Selective Graph Colouring Problem and generalisations},
+    author={Santini, Alberto},
+    date={2017-10-27},
+    howpublished={Github repository},
+    doi={10.5281/zenodo.91941968},
+    url={https://github.com/alberto-santini/selective-graph-colouring/}
+}
+```
+
+## Building the solvers
 
 The easiest way to build is probably using cmake.
 Prerequisites are [Boost](https://www.boost.org/) (for `base-sgcp`), [exactcolors](https://github.com/heldstephan/exactcolors) and IBM's cplex (for both `base-sgcp` and `max-weight-sgcp`), [ProgramOptions.hxx](https://github.com/Fytch/ProgramOptions.hxx) (for `max-weight-sgcp`).
@@ -93,16 +140,9 @@ You file detailed results in CSV format at the path you specified in the paramet
 
 You will find detailed results in CSV format in the file specified with the `-o` switch.
 
-# Selective Graph Colouring Problem
+## File structure (SGCP)
 
-Relevant files for the SGCP is in folder `base-sgcp`.
-The reference paper is:
-    
-    Fabio Furini, Enrico Malaguti, and Alberto Santini. An exact algorithm for the Partition Colouring Problem. Computers & Operations Resarch, 92:170-181, 2018.
-
-Please cite this paper if you are using our solver in your research.
-
-## File structure
+Files and folders are organised as follows.
 
 ### Folder `source-code`
 
@@ -137,16 +177,7 @@ This file can be used as a base for writing your own parameters file.
 Unfortunately the original file used in the paper has been lost when the cluster at the University of Bologna broke down and no data was saved.
 Using the information in the paper, however, it should be possible to reconstruct a config file which matches the original one exactly.
 
-# Max-Weight Selective Colouring Problem
-
-Code for the MWSGCP is in folder `max-weight-sgcp`.
-The reference paper for these algorithms is:
-
-    Denis Cornaz, Enrico Malaguti, Fabio Furini, and Alberto Santini. Selective line-graphs and partition colorings. Draft.
-
-Please cite the final version of this paper (to be posted as soon as possible) if you are using our solver in your research.
-
-## File structure
+## File structure (MWSGCP)
 
 ### Folder `max-weight-sgcp/source-code`
 
@@ -160,6 +191,6 @@ Files `graph_weighted.{h,cpp}` implement the corresponding extension for the MWS
 This folder contains instances for the MWSGCP generated by me.
 The instances have the same format as the SGCP instances, except that before the lines representing edges, there are `p` lines indicating the weight of each cluster.
 
-# License
+## License
 
 This source code in this repository is released under the GPLv3.0 license, as detailed in the file `LICENSE.txt`
